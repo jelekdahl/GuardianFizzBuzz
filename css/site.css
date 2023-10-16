@@ -58,5 +58,36 @@ footer .bi:hover {
 .app-logo {
   max-width: 400px;
   border-radius: 15px;
-  /* box-shadow: ; */
+}
+
+.fizzBuzz {
+  background-color: var(--je-secondary-color) !important;
+  color: var(--je-dark-color) !important;
+}
+
+.fizz {
+  background-color: lightgray !important;
+  color: var(--je-dark-color) !important;
+}
+
+.buzz {
+  background-color: var(--je-primary-color) !important;
+  color: var(--je-light-color) !important;
+}
+
+span.fizzBuzz,
+span.fizz,
+span.buzz {
+  border-radius: 4px;
+}
+
+#results > tr > td {
+  width: 20%;
+}
+
+.resultsContainer {
+  overflow-y: auto;
+  min-height: 310px;
+  /* max-height: 42vh; */
+  max-height: calc(70vh - 200px);
 }

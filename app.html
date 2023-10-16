@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APP NAME: By Mark Spectre</title>
+  <title>FizzBuzz: By Jon-Erik Ekdahl</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,7 +28,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">
         <img class="me-2" src="/img/je_logo_only_dark.svg" height="30" />
-        APP NAME
+        FizzBuzz
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,11 +47,11 @@
           </li>
           <li class="nav-item">
             <!-- CHANGE ME TO THE REAL REPO LINK -->
-            <a class="nav-link" href="#">The Repo</a>
+            <a class="nav-link" href="https://github.com/jelekdahl/GuardianFizzBuzz" target="_blank" rel="noopener noreferrer">The Repo</a>
           </li>
           <li class="nav-item">
             <!-- CHANGE ME TO REAL PORTFOLIO LINK -->
-            <a class="nav-link" href="https://stunning-donut-3b9321.netlify.app/">
+            <a class="nav-link" href="https://stunning-donut-3b9321.netlify.app/" target="_blank" rel="noopener noreferrer">
               About
             </a>
           </li>
@@ -69,10 +69,62 @@
   </nav>
 
   <main class="container py-3">
-    <h1>APP UI GOES HERE</h1>
-    <input class="form-control my-3" placeholder="Enter a message" type="text" style="width: 10rem;" name="message"
-      id="message" />
-    <button id="btnSubmit" class="btn btn-primary">Display Message</button>
+    <div class="row row-cols-1 row-cols-md-2">
+      <div class="col border-start border-end border-2">
+        <h1 class="fw-bold mb-3">FizzBuzz: A Coding Challenge</h1>
+        <p class="lead">
+          FizzBuzz is a JavaScript coding exercise involving loops, boolean logic, and DOM Manipulation. Given two
+          values, display the numbers 1-100 (or another number of the user's choice). When a number is divisible by the
+          first value, display <span class="fizz">Fizz</span> instead. When a number is divisible by the second value,
+          display <span class="buzz">Buzz</span> instead.
+          When a number is divisible by both values, display <span class="fizzBuzz">FizzBuzz</span>.
+        </p>
+        <h2 class="mt-4 border-bottom border-2">Instructions</h2>
+        <p>
+          Enter a Fizz value, a Buzz value, and a Stop number. Then press the Go button. The numbers ranging from 1
+          to your Stop number will be displayed. Numbers will be colored differently, depending on if they are
+          divisible by the Fizz value, Buzz value, or both.
+        </p>
+      </div>
+      <div class="col border-start border-end border-2">
+        <h2 class="border-bottom border-2">Enter your values below</h2>
+        <form action="#" class="row g-2 mt-1 align-items-end">
+          <div class="col-12 col-lg-6 col-xxl-4">
+            <label class="form-label-sm" for="fizzValue">Fizz Value</label>
+            <input class="form-control-sm w-100" id="fizzValue" name="fizzValue" type="number"
+              placeholder="Fizz Number" />
+          </div>
+
+          <div class="col-12 col-lg-6 col-xxl-4">
+            <label class="form-label-sm" for="buzzValue">Buzz Value</label>
+            <input class="form-control-sm w-100" id="buzzValue" name="buzzValue" type="number"
+              placeholder="Buzz Number" />
+          </div>
+
+          <div class="col-12 col-lg-6 col-xxl-4">
+            <label class="form-label-sm" for="stopValue">Stop Number (Max: 5000)</label>
+            <input class="form-control-sm w-100" id="stopValue" name="stopValue" type="number"
+              placeholder="Stop Number" />
+          </div>
+
+          <div class="col-12 col-lg-6 col-xxl-4 offset-xxl-4">
+            <button class="btn btn-sm btn-dark mt-4 w-100" id="btnGo" type="button">Go!</button>
+          </div>
+        </form>
+
+        <div>
+          <h2 class="mt-4 border-bottom border-2">Results</h2>
+          <div class="resultsContainer">
+            <table class="table table-bordered text-center">
+              <tbody id="results">
+                <!-- numbers will appear here! -->
+                <!-- e.g. <tr><td></td></tr> -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer class="py-3 container-fluid">
@@ -103,12 +155,14 @@
   <script src="/js/site.js"></script>
 
   <script>
-    // get the button on the page and assign it to a variable
-    let button = document.getElementById('btnSubmit');
+    document.getElementById('fizzValue').value = DEF_VAL_FIZZ;
+    document.getElementById('buzzValue').value = DEF_VAL_BUZZ;
+    document.getElementById('stopValue').value = DEF_VAL_STOP;
 
-    // tell the button to run our displayMessage function when clicked
-    button.addEventListener('click', displayMessage);
-
+    let button = document.getElementById('btnGo');
+    button.addEventListener('click', function () {
+      populateTable('results', 'fizzValue', 'buzzValue', 'stopValue');
+    });
   </script>
 
 </body>

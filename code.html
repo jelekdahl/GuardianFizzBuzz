@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APP NAME: By Mark Spectre</title>
+  <title>FizzBuzz: By Jon-Erik Ekdahl</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -31,7 +31,7 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="index.html">
         <img class="me-2" src="/img/je_logo_only_dark.svg" height="30" />
-        APP NAME
+        FizzBuzz
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,11 +50,13 @@
           </li>
           <li class="nav-item">
             <!-- CHANGE ME TO THE REAL REPO LINK -->
-            <a class="nav-link" href="#">The Repo</a>
+            <a class="nav-link" href="https://github.com/jelekdahl/GuardianFizzBuzz" target="_blank"
+              rel="noopener noreferrer">The Repo</a>
           </li>
           <li class="nav-item">
             <!-- CHANGE ME TO REAL PORTFOLIO LINK -->
-            <a class="nav-link" href="https://stunning-donut-3b9321.netlify.app/">
+            <a class="nav-link" href="https://stunning-donut-3b9321.netlify.app/" target="_blank"
+              rel="noopener noreferrer">
               About
             </a>
           </li>
@@ -72,35 +74,344 @@
   </nav>
 
   <main class="container py-3">
-    <h1 class="border-bottom border-2 border-dark">The Code</h1>
-    <div class="row">
-      <div class="col-12 col-lg-8">
-        <pre class="line-numbers">
-          <code class="language-js">
-function displayMessage() {
-  //get the text out of our input and assign it to a variable
-  let msg = document.getElementById('message').value;
 
-  //alert('Hello Guardian Cohort!');
-  Swal.fire(
-    {
-      backdrop: false,
-      title: 'APP NAME',
-      text: msg, // <-- replace this text with that variable
-    }
-  );
-}
-          </code>
-        </pre>
+    <h1 class="border-bottom border-2 border-dark mb-3">The Code</h1>
+
+    <!-- Global Constants and Variables -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeConstLet" aria-expanded="false" aria-controls="codeConstLet">
+          Global Constants and Variables
+        </button>
       </div>
-      <div class="col-12 col-lg-4">
-        <p>The code is structured in one function</p>
-        <p>
-          <code>displayMessage</code> displays a SweetAlert
-          when the button is pressed.
-        </p>
+
+      <div id="codeConstLet"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                const MAX_VAL_STOP = 5000;
+                const COUNT_START = 1;
+                const COL_PER_ROW = 5;
+
+                const CLASS_FIZZ = 'fizz';
+                const CLASS_BUZZ = 'buzz';
+                const CLASS_FIZZBUZZ = 'fizzBuzz';
+                const CONTENT_FIZZ = "Fizz";
+                const CONTENT_BUZZ = 'Buzz';
+                const CONTENT_FIZZBUZZ = 'FizzBuzz';
+
+                let DEF_VAL_FIZZ = 3;
+                let DEF_VAL_BUZZ = 5;
+                let DEF_VAL_STOP = 100;
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            Constants and variables used throughout the code,
+            to control and identify reused values more easily
+          </p>
+        </div>
       </div>
     </div>
+
+    <!-- Function: populateTable -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codePopTable" aria-expanded="false" aria-controls="codePopTable">
+          Function: populateTable
+        </button>
+      </div>
+
+      <div id="codePopTable"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function populateTable(idTbody, idFizzInput, idBuzzInput, idStopInput) {
+                  let values = getValues(idFizzInput, idBuzzInput, idStopInput);
+                
+                  if (isValidInput(values)) {
+                    let fizzBuzz = generateFizzBuzz(values);
+                    displayFizzBuzz(fizzBuzz, idTbody);
+                  }
+                }
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            The function called by the app to initiate the table generation process.
+            The arguments it accepts are the IDs for the form fields for Fizz/Buzz/Stop values,
+            as well as the ID for the table body in which the game's values will be displayed.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- getValues -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeGetValues" aria-expanded="false" aria-controls="codeGetValues">
+          Function: getValues
+        </button>
+      </div>
+
+      <div id="codeGetValues"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function getValues(idFizzInput, idBuzzInput, idStopInput) {
+                  let values = {
+                    fizz: parseInt(document.getElementById(idFizzInput).value),
+                    buzz: parseInt(document.getElementById(idBuzzInput).value),
+                    stop: parseInt(document.getElementById(idStopInput).value)
+                  };
+                
+                  return values;
+                }
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            Given the IDs of the form fields for Fizz/Buzz/Stop values, this function
+            retrieves the user's inputs in the form fields, attempts to parse them as
+            integers, and consolidates them into a single object.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- generateFizzBuzz -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeGenerateFizzBuzz" aria-expanded="false" aria-controls="codeGenerateFizzBuzz">
+          Function: generateFizzBuzz
+        </button>
+      </div>
+
+      <div id="codeGenerateFizzBuzz"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function generateFizzBuzz(values) {
+                  let fizzBuzz = new Array(values.stop - COUNT_START + 2); //Gonna do a 1-indexed array
+                  if (values.fizz == values.buzz) {
+                    fillEveryNthCell(fizzBuzz, values.fizz, CONTENT_FIZZBUZZ);
+                  } else {
+                    fillEveryNthCell(fizzBuzz, values.fizz * values.buzz, CONTENT_FIZZBUZZ);
+                    fillEveryNthCell(fizzBuzz, values.fizz, CONTENT_FIZZ);
+                    fillEveryNthCell(fizzBuzz, values.buzz, CONTENT_BUZZ);
+                  }
+                
+                  for (let i = 1; i < fizzBuzz.length; i++) {
+                    if (!fizzBuzz[i]) fizzBuzz[i] = '' + i;
+                  }
+                  
+                  return fizzBuzz;
+                }
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            This function takes the user's inputs as arguments, and
+            turns them into an array of the values resulting from the
+            game of FizzBuzz represented by said values.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- displayFizzBuzz -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeDisplayFizzBuzz" aria-expanded="false" aria-controls="codeDisplayFizzBuzz">
+          Function: displayFizzBuzz
+        </button>
+      </div>
+
+      <div id="codeDisplayFizzBuzz"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function displayFizzBuzz(fizzBuzz, idTbody) {
+                  let html = fizzBuzzToHTML(fizzBuzz);
+                  let tbody = document.getElementById(idTbody);
+                  tbody.innerHTML = html;
+                }
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            This function receives an array of the values resulting from a game of FizzBuzz,
+            and places them into the table body designated by the app.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- isValidInput -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeIsValidInput" aria-expanded="false" aria-controls="codeIsValidInput">
+          Function: isValidInput
+        </button>
+      </div>
+
+      <div id="codeIsValidInput"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function isValidInput(values) {
+                  let isValid = true;
+                
+                  if (!Number.isInteger(values.fizz) || values.fizz < COUNT_START) {
+                    isValid = false;
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Invalid Fizz Value',
+                      text: `Please change Fizz Value to an integer between ${COUNT_START} and ${MAX_VAL_STOP}.`,
+                    });
+                  } else if (!Number.isInteger(values.buzz) || values.buzz < COUNT_START) {
+                    isValid = false;
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Invalid Buzz Value',
+                      text: `Please change Buzz Value to an integer between ${COUNT_START} and ${MAX_VAL_STOP}.`,
+                    });
+                  } else if (!Number.isInteger(values.stop) || values.stop < COUNT_START || values.stop > MAX_VAL_STOP) {
+                    isValid = false;
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Invalid Stop Value',
+                      text: `Please change Stop Value to an integer between ${COUNT_START} and ${MAX_VAL_STOP}.`,
+                    });
+                  }
+                
+                  return isValid;
+                }
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            This function is used immediately after receiving and parsing the user input.
+            If there are any issues with the user's input, the game is prevented from playing
+            out, and a SweetAlert message is displayed instructing the user to correct their input.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- fillEveryNthCell -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeFillEveryNthCell" aria-expanded="false" aria-controls="codeFillEveryNthCell">
+          Function: fillEveryNthCell
+        </button>
+      </div>
+
+      <div id="codeFillEveryNthCell"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function fillEveryNthCell(arr, n, className) {
+                  for (let i = n; i < arr.length; i += n) {
+                    if (!arr[i]) arr[i] = className;
+                  }
+                }                
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            This function helps create the array of values resulting from a game of FizzBuzz.
+            Specifically, it takes one of Fizz/Buzz/FizzBuzz and inserts it in every part of
+            the array it belongs at.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- fizzBuzzToHTML -->
+    <div class="row">
+      <div>
+        <button class="h2 border-0 bg-dark-subtle rounded-3 w-100" type="button" data-bs-toggle="collapse"
+          href="#codeFizzBuzzToHTML" aria-expanded="false" aria-controls="codeFizzBuzzToHTML">
+          Function: fizzBuzzToHTML
+        </button>
+      </div>
+
+      <div id="codeFizzBuzzToHTML"
+        class="row collapse container bg-light ms-0 mb-3 p-3 border border-1 border-dark-subtle rounded-3">
+        <div class="col-12 col-lg-8">
+          <pre class="line-numbers">
+              <code class="language-js">
+                function fizzBuzzToHTML(fizzBuzz) {
+                  let html = '';
+                  
+                  let i = 1;
+                  let j, rowStop;
+                  while (i < fizzBuzz.length) {
+                    j = i;
+                    rowStop = Math.min(j + COL_PER_ROW, fizzBuzz.length);
+                
+                    html += '<tr>';
+                    while (j < rowStop) {
+                      if (fizzBuzz[j] == CONTENT_FIZZBUZZ) {
+                        html += `<td class="${CLASS_FIZZBUZZ}">${fizzBuzz[j]}</td>`;
+                      } else if (fizzBuzz[j] == CONTENT_FIZZ) {
+                        html += `<td class="${CLASS_FIZZ}">${fizzBuzz[j]}</td>`;
+                      } else if (fizzBuzz[j] == CONTENT_BUZZ) {
+                        html += `<td class="${CLASS_BUZZ}">${fizzBuzz[j]}</td>`;
+                      } else {
+                        html += `<td>${fizzBuzz[j]}</td>`;
+                      }
+                
+                      j++;
+                    }
+                    html += '</tr>';
+                    i = rowStop;
+                  }
+                
+                  return html;
+                }
+              </code>
+            </pre>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <p>
+            This helper function takes an array of the values resulting from a game of FizzBuzz,
+            and converts them into a string of HTML.
+          </p>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <footer class="py-3 container-fluid">
