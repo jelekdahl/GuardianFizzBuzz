@@ -88,6 +88,17 @@ span.buzz {
 .resultsContainer {
   overflow-y: auto;
   min-height: 310px;
-  /* max-height: 42vh; */
-  max-height: calc(70vh - 200px);
+  max-height: calc(100vh - 554px);
+}
+
+@media (min-width: 768px) {
+  .resultsContainer {
+    max-height: calc(100vh - 634px);
+  }
+}
+
+@media (min-width: 992px) {
+  .resultsContainer {
+    max-height: calc(100vh - 424px);
+  }
 }
