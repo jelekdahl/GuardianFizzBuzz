@@ -105,3 +105,13 @@ span.buzz {
     max-height: calc(100vh - 424px);
   }
 }
+
+.codeHeader {
+  background-color: var(--je-primary-color);
+  color: var(--je-light-color);
+}
+
+.codeHeader:hover {
+  background-color: var(--je-secondary-color);
+  color: var(--je-dark-color);
+}
