@@ -71,7 +71,7 @@ footer .bi:hover {
 }
 
 .buzz {
-  background-color: var(--je-primary-color) !important;
+  background-color: rgb(85, 85, 85) !important;
   color: var(--je-light-color) !important;
 }
 
@@ -87,8 +87,11 @@ span.buzz {
 
 .resultsContainer {
   overflow-y: auto;
-  min-height: 310px;
   max-height: calc(100vh - 554px);
+}
+
+.resultsContainer:has(table):has(tbody:not(:empty)) {
+  min-height: 310px;
 }
 
 @media (min-width: 768px) {
