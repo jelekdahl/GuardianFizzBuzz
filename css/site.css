@@ -1,8 +1,9 @@
 :root {
-  --je-primary-color: #001e43;
+  --je-primary-color: #004b93;
   /* theme-100 or theme-200 // theme-800 or theme-900 ? */
-  --je-secondary-color: #ff993b;
+  --je-secondary-color: #af784e;
   /* theme-core or theme-500 or theme-600 */
+  --je-ternary-color: #c9002b;
   --je-light-color: #dfe3e4;
   --je-dark-color: #1b1b1b;
 }
@@ -58,21 +59,22 @@ footer .bi:hover {
 .app-logo {
   max-width: 400px;
   border-radius: 15px;
+  background-color: var(--je-primary-color);
 }
 
 .fizzBuzz {
   background-color: var(--je-secondary-color) !important;
-  color: var(--je-dark-color) !important;
+  color: #ffffff !important;
 }
 
 .fizz {
-  background-color: lightgray !important;
-  color: var(--je-dark-color) !important;
+  background-color: var(--je-primary-color) !important;
+  color: #ffffff !important;
 }
 
 .buzz {
-  background-color: rgb(85, 85, 85) !important;
-  color: var(--je-light-color) !important;
+  background-color: var(--je-ternary-color) !important;
+  color: #ffffff !important;
 }
 
 span.fizzBuzz,
@@ -122,5 +124,5 @@ span.buzz {
 
 .codeHeader:hover {
   background-color: var(--je-secondary-color);
-  color: var(--je-dark-color);
+  color: var(--je-light-color);
 }
