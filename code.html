@@ -136,12 +136,12 @@
         <div class="col-12 col-lg-8">
           <pre class="line-numbers">
               <code class="language-js">
-                function populateTable(idTbody, idFizzInput, idBuzzInput, idStopInput) {
+                function populateTable(idResultsContainer, idFizzInput, idBuzzInput, idStopInput) {
                   let values = getValues(idFizzInput, idBuzzInput, idStopInput);
                 
                   if (isValidInput(values)) {
                     let fizzBuzz = generateFizzBuzz(values);
-                    displayFizzBuzz(fizzBuzz, idTbody);
+                    displayFizzBuzz(fizzBuzz, idResultsContainer);
                   }
                 }
               </code>
@@ -152,7 +152,7 @@
           <p>
             The function called by the app to initiate the table generation process.
             The arguments it accepts are the IDs for the form fields for Fizz/Buzz/Stop values,
-            as well as the ID for the table body in which the game's values will be displayed.
+            as well as the ID for the container in which the game's values will be displayed.
           </p>
         </div>
       </div>
@@ -253,10 +253,10 @@
         <div class="col-12 col-lg-8">
           <pre class="line-numbers">
               <code class="language-js">
-                function displayFizzBuzz(fizzBuzz, idTbody) {
+                function displayFizzBuzz(fizzBuzz, idResultsContainer) {
                   let html = fizzBuzzToHTML(fizzBuzz);
-                  let tbody = document.getElementById(idTbody);
-                  tbody.innerHTML = html;
+                  let resultsContainer = document.getElementById(idResultsContainer);
+                  resultsContainer.innerHTML = html;
                 }
               </code>
             </pre>
@@ -264,8 +264,9 @@
 
         <div class="col-12 col-lg-4">
           <p>
-            This function receives an array of the values resulting from a game of FizzBuzz,
-            and places them into the table body designated by the app.
+            This function receives an array of the values resulting from a game of FizzBuzz, creates the HTML
+            representing a table- or spreadsheet-like structure containing the values, and places them into the
+            container designated by the app.
           </p>
         </div>
       </div>
@@ -376,29 +377,17 @@
               <code class="language-js">
                 function fizzBuzzToHTML(fizzBuzz) {
                   let html = '';
-                  
-                  let i = 1;
-                  let j, rowStop;
-                  while (i < fizzBuzz.length) {
-                    j = i;
-                    rowStop = Math.min(j + COL_PER_ROW, fizzBuzz.length);
                 
-                    html += '<tr>';
-                    while (j < rowStop) {
-                      if (fizzBuzz[j] == CONTENT_FIZZBUZZ) {
-                        html += `<td class="${CLASS_FIZZBUZZ}">${fizzBuzz[j]}</td>`;
-                      } else if (fizzBuzz[j] == CONTENT_FIZZ) {
-                        html += `<td class="${CLASS_FIZZ}">${fizzBuzz[j]}</td>`;
-                      } else if (fizzBuzz[j] == CONTENT_BUZZ) {
-                        html += `<td class="${CLASS_BUZZ}">${fizzBuzz[j]}</td>`;
-                      } else {
-                        html += `<td>${fizzBuzz[j]}</td>`;
-                      }
-                
-                      j++;
+                  for (let i = 1; i < fizzBuzz.length; i++) {
+                    if (fizzBuzz[i] == CONTENT_FIZZBUZZ) {
+                      html += `<div class="col ${CLASS_FIZZBUZZ}">${fizzBuzz[i]}</div>`;
+                    } else if (fizzBuzz[i] == CONTENT_FIZZ) {
+                      html += `<div class="col ${CLASS_FIZZ}">${fizzBuzz[i]}</div>`;
+                    } else if (fizzBuzz[i] == CONTENT_BUZZ) {
+                      html += `<div class="col ${CLASS_BUZZ}">${fizzBuzz[i]}</div>`;
+                    } else {
+                      html += `<div class="col">${fizzBuzz[i]}</div>`;
                     }
-                    html += '</tr>';
-                    i = rowStop;
                   }
                 
                   return html;
@@ -409,8 +398,8 @@
 
         <div class="col-12 col-lg-4">
           <p>
-            This helper function takes an array of the values resulting from a game of FizzBuzz,
-            and converts them into a string of HTML.
+            This helper function takes an array of the values resulting from a game of FizzBuzz, and converts them into
+            a string of HTML representing a table- or spreadsheet-like structure containing those values.
           </p>
         </div>
       </div>

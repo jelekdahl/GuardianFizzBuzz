@@ -81,7 +81,7 @@ span.buzz {
   border-radius: 4px;
 }
 
-#results > tr > td {
+#results>tr>td {
   width: 20%;
 }
 
@@ -90,7 +90,16 @@ span.buzz {
   max-height: calc(100vh - 554px);
 }
 
-.resultsContainer:has(table):has(tbody:not(:empty)) {
+#results>div {
+  width: 20%;
+  padding: 0.5em 0em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightgray;
+  text-align: center;
+}
+
+.resultsContainer:has(div:not(:empty)) {
   min-height: 310px;
 }
 

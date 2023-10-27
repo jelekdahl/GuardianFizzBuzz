@@ -13,12 +13,12 @@ let DEF_VAL_FIZZ = 3;
 let DEF_VAL_BUZZ = 5;
 let DEF_VAL_STOP = 100;
 
-function populateTable(idTbody, idFizzInput, idBuzzInput, idStopInput) {
+function populateTable(idResultsContainer, idFizzInput, idBuzzInput, idStopInput) {
   let values = getValues(idFizzInput, idBuzzInput, idStopInput);
 
   if (isValidInput(values)) {
     let fizzBuzz = generateFizzBuzz(values);
-    displayFizzBuzz(fizzBuzz, idTbody);
+    displayFizzBuzz(fizzBuzz, idResultsContainer);
   }
 }
 
@@ -74,7 +74,7 @@ function generateFizzBuzz(values) {
   for (let i = 1; i < fizzBuzz.length; i++) {
     if (!fizzBuzz[i]) fizzBuzz[i] = '' + i;
   }
-  
+
   return fizzBuzz;
 }
 
@@ -84,37 +84,25 @@ function fillEveryNthCell(arr, n, className) {
   }
 }
 
-function displayFizzBuzz(fizzBuzz, idTbody) {
+function displayFizzBuzz(fizzBuzz, idResultsContainer) {
   let html = fizzBuzzToHTML(fizzBuzz);
-  let tbody = document.getElementById(idTbody);
-  tbody.innerHTML = html;
+  let resultsContainer = document.getElementById(idResultsContainer);
+  resultsContainer.innerHTML = html;
 }
 
 function fizzBuzzToHTML(fizzBuzz) {
   let html = '';
-  
-  let i = 1;
-  let j, rowStop;
-  while (i < fizzBuzz.length) {
-    j = i;
-    rowStop = Math.min(j + COL_PER_ROW, fizzBuzz.length);
 
-    html += '<tr>';
-    while (j < rowStop) {
-      if (fizzBuzz[j] == CONTENT_FIZZBUZZ) {
-        html += `<td class="${CLASS_FIZZBUZZ}">${fizzBuzz[j]}</td>`;
-      } else if (fizzBuzz[j] == CONTENT_FIZZ) {
-        html += `<td class="${CLASS_FIZZ}">${fizzBuzz[j]}</td>`;
-      } else if (fizzBuzz[j] == CONTENT_BUZZ) {
-        html += `<td class="${CLASS_BUZZ}">${fizzBuzz[j]}</td>`;
-      } else {
-        html += `<td>${fizzBuzz[j]}</td>`;
-      }
-
-      j++;
+  for (let i = 1; i < fizzBuzz.length; i++) {
+    if (fizzBuzz[i] == CONTENT_FIZZBUZZ) {
+      html += `<div class="col ${CLASS_FIZZBUZZ}">${fizzBuzz[i]}</div>`;
+    } else if (fizzBuzz[i] == CONTENT_FIZZ) {
+      html += `<div class="col ${CLASS_FIZZ}">${fizzBuzz[i]}</div>`;
+    } else if (fizzBuzz[i] == CONTENT_BUZZ) {
+      html += `<div class="col ${CLASS_BUZZ}">${fizzBuzz[i]}</div>`;
+    } else {
+      html += `<div class="col">${fizzBuzz[i]}</div>`;
     }
-    html += '</tr>';
-    i = rowStop;
   }
 
   return html;
