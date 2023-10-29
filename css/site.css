@@ -99,7 +99,7 @@ span.buzz {
 }
 
 .resultsContainer:has(div:not(:empty)) {
-  min-height: 310px;
+  min-height: 308px;
 }
 
 @media (min-width: 768px) {
