@@ -60,6 +60,7 @@ footer .bi:hover {
   max-width: 400px;
   border-radius: 15px;
   background-color: var(--je-primary-color);
+  padding: 5%;
 }
 
 .fizzBuzz {
@@ -81,10 +82,6 @@ span.fizzBuzz,
 span.fizz,
 span.buzz {
   border-radius: 4px;
-}
-
-#results>tr>td {
-  width: 20%;
 }
 
 .resultsContainer {
@@ -117,12 +114,16 @@ span.buzz {
   }
 }
 
-.codeHeader {
+.code-header,
+.je-button {
   background-color: var(--je-primary-color);
   color: var(--je-light-color);
+  text-align: center;
 }
 
-.codeHeader:hover {
+.code-header:hover,
+.je-button:hover,
+.je-button:focus {
   background-color: var(--je-secondary-color);
   color: var(--je-light-color);
 }
