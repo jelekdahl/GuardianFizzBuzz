@@ -162,6 +162,11 @@ span.buzz {
   max-height: 50vh;
 }
 
+.accordion-collapse > .row > .col-lg-4 {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
 .personal-link > img {
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
